@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}upload{% endblock title %}
+
+{% load static %}
+
+{% block body %}
+
+{% comment %} <html>
+<head>
+	<title>Upload Form</title>
+	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+  <style>
+    .container {
+	margin: 0 auto;
+	max-width: 600px;
+	padding: 20px;
+}
+
+.form-group {
+	margin-bottom: 10px;
+}
+
+label {
+	display: inline-block;
+	width: 100px;
+}
+
+input[type="text"],
+textarea {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+button[type="submit"] {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #45a049;
+}
+  </style>
+</head>
+<body>
+	<div class="container">.
+        
+		<form id="uploadForm" enctype="multipart/form-data">
+		{{csrf_token}}
+            <div class="form-group">
+				<label for="fileUpload">Upload Files:</label>
+				<input type="file" id="fileUpload" name="fileUpload" multiple>
+			</div>
+            {{form.myfiles}}
+
+			<div class="form-group">
+				<label for="fileName">File Name:</label>
+				<input type="text" id="fileName" name="fileName">
+			</div>
+            {{form.f_name}}
+
+			<div class="form-group">
+				<label for="course">Course:</label>
+				<input type="text" id="course" name="course">
+			</div>
+            {{form.course}}
+
+			<div class="form-group">
+				<label for="batch">Batch:</label>
+				<input type="text" id="batch" name="batch">
+			</div>
+            {{form.batch}}
+
+			<!-- <div class="form-group">
+				<label for="note">Note:</label>
+				<textarea id="note" name="note" rows="4" cols="50"></textarea>
+			</div> -->
+
+			<button type="submit" id="submitBtn">Submit</button>
+		</form>
+	</div>
+
+	<script>
+  const form = document.getElementById('uploadForm');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+  
+    // Get form data
+    const fileUpload = document.getElementById('fileUpload').files;
+    const fileName = document.getElementById('fileName').value;
+    const course = document.getElementById('course').value;
+    const batch = document.getElementById('batch').value;
+    // const note = document.getElementById('note').value;
+  
+    // Create a FormData object and append form data
+    const formData = new FormData();
+    formData.append('fileUpload', fileUpload);
+    formData.append('fileName', fileName);
+    formData.append('course', course);
+    formData.append('batch', batch);
+    // formData.append('note', note);
+  
+    // Send form data to server
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload');
+    xhr.send(formData);
+  });
+  </script>
+</body>
+</html> {% endcomment %}
+
+{% comment %} <div class="container">
+    <form action="{%url 'home:sendfiles' %}" method="POST" enctype="multipart/form-data">
+        <input type="text" class="form-control" id="inputPassword2"  name="filename" placeholder="enter your filename">
+        <input type="file" multiple name ="uploadfiles">
+        {% csrf_token  %}
+        {{form}}
+        <button type="submit" class="btn btn-primary mb-2">upload</button>
+    </form>
+</div> {% endcomment %}
+
+<style>
+#messages{
+    background-color: grey;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+}
+</style>
+
+
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="box">
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
+        <form action="" method="POST" enctype="multipart/form-data" >
+            {% comment %} <input type="text" class="form-control" id="inputPassword2"  name="filename" placeholder="enter your filename">
+            <input type="file" multiple name ="uploadfiles"> {% endcomment %}
+            {% csrf_token  %}
+            <div class="form-group" style =" padding : 2px">
+                Name: {{form.f_name}}
+            </div> 
+            <div class="form-group" style =" padding : 2px">
+                Course: {{form.course}}
+            </div>
+            
+            <div class="form-group" style =" padding : 2px">
+                Batch: {{form.batch}}
+            </div>
+            
+            <div class="form-group" style =" padding : 2px">
+                Type: {{form.type}}
+            </div>
+
+            <div class="form-group" style =" padding : 5px">
+                {{form.myfiles}}
+            </div>
+
+            <div class="form-group" style =" padding : 5px">
+                <button type="submit" class="btn btn-primary my-2">upload</button>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock body %}

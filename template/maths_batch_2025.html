@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}maths_batch_2025{% endblock title %}
+
+{% load static %}
+
+{% block body %}
+<ol>
+    <h1>Tutorials: </h1>
+{% for i in tutorials %}
+    <br>
+    <li>
+        <div class="a">
+            <h3>{{i.f_name}}</h3>
+            <a href="{{ i.myfiles.url }}"><span class="logo"><img src="/static/d_icon.png" alt="" height="20px"></span></a>
+        </div>
+    </li>
+{% endfor %}
+</ol>
+
+<ol>
+    <h1>Quizes: </h1>
+{% for i in quiz %}
+    <br>
+    <li>
+        <div class="a">
+            <h3>{{i.f_name}}</h3>
+            <a href="{{ i.myfiles.url }}"><span class="logo"><img src="/static/d_icon.png" alt="" height="20px"></span></a>
+        </div>
+    </li>
+{% endfor %}
+</ol>
+
+<ol>
+    <h1>Major-Minors: </h1>
+{% for i in major_minor %}
+    <br>
+    <li>
+        <div class="a">
+            <h3>{{i.f_name}}</h3>
+            <a href="{{ i.myfiles.url }}"><span class="logo"><img src="/static/d_icon.png" alt="" height="20px"></span></a>
+        </div>
+    </li>
+{% endfor %}
+</ol>
+
+{% endblock body %}
